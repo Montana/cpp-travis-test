@@ -1,0 +1,14 @@
+sudo: required 
+
+language: cpp 
+
+services: 
+  - docker
+
+before_script:
+  - docker pull gcc:5.4.0
+
+script:
+  - docker run -v $(pwd):$(pwd) -w $(pwd) -p 127.0.0.1:80:4567 gcc:5.4.0 /bin/sh -c "bash ./build.sh; ./hello_world"
+  - docker ps -a
+  - docker ps -q
